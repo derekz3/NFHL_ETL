@@ -18,9 +18,10 @@
 4. `source pipe-test/bin/activate`
 5. `pip3 install -r requirements.txt`
 6. `python3 pipe.py`
-7. Enter password when prompted.
+7. Enter password when/if prompted.
 
 *...and once you're done*
 
-8. `rm -r pipe-test`
-9. Check `~/Downloads` for `06037C_20210601.zip`
+9. `deactivate`
+10. `rm -r pipe-test`
+11. Check `~/Downloads` for `06037C_20210601.zip`
