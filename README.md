@@ -1,13 +1,15 @@
 # NFHL ETL Pipeline
-- E: The repo uses the Selenium WebDriver protocol, configured for the Google Chrome web browser, to scrape the National Flood Hazard Layer (NFHL) from the FEMA Map Service Center (MSC).
-- T: Revelant layers will be selected from the NFHL data and converted to GeoJSON format via QGIS.
-- L: The GeoJSON file will be uploaded to a Google Cloud Storage bucket to further explore, clean and prepare the data for analysis.
+
+- **E**: The repo uses the Selenium WebDriver protocol, configured for the Google Chrome web browser, to scrape the National Flood Hazard Layer (NFHL) from the FEMA Map Service Center (MSC).
+- **T**: Revelant layers will be selected from the NFHL data and converted to GeoJSON format via QGIS.
+- **L**: The GeoJSON file will be uploaded to a Google Cloud Storage bucket to further explore, clean and prepare the data for analysis.
 
 ***I'VE ONLY DONE 'E'--extract SO FAR***
 
 ## Setup
-1. `git clone repo`
-2. `cd repo`
+
+1. `git clone https://github.com/derekz3/NFHL_ETL.git pipeline`
+2. `cd pipeline`
 3. `pip3 install -r requirements.txt`
 4. `python3 -m venv pipe-test`
 5. `source pipe-test/bin/activate`
