@@ -18,5 +18,5 @@
 
 *...and once you're done*
 
-8. `rm -r venv`
+8. `rm -r pipe-test`
 9. Check `~/Downloads` for `06037C_20210601.zip`
