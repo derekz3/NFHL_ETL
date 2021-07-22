@@ -23,12 +23,6 @@ assert sys.version_info >= MIN_PYTHON,\
     f"requires Python {'.'.join([str(n) for n in MIN_PYTHON])} or newer"
 
 
-# Create virtual environment
-os.system('python3 -m venv pipe-test')
-os.system('source pipe-test/bin/activate')
-os.system('pip3 install -r requirements.txt')
-
-
 # [Automate `sudo` with no password]
 
 
@@ -186,7 +180,7 @@ def extract_lacounty_nfhl(headless=False):
 
     os.chdir(DOWNLOADS)
     with ZipFile('06037C_20210601.zip', 'r') as zipObj: 
-        zipObj.extractall()
+        zipObj.extractall('nfhl_layers')
     os.system('rm 06037C_20210601.zip')
 
 
