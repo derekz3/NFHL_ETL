@@ -68,13 +68,8 @@ print(bin)
 #--------------------------------Extract--------------------------------#
 
 
-# Create WebDriver object for Chrome browser
-DRIVER = webdriver.Chrome()
-PAUSE = 1.5
-
-
 # Check if element is usable by script
-def check_for_element(item, mode, method='ID', driver=DRIVER):
+def check_for_element(driver, item, mode, method='ID'):
     
     try:
         
@@ -90,16 +85,20 @@ def check_for_element(item, mode, method='ID', driver=DRIVER):
             element = WebDriverWait(driver, timeout=20).until(
                 EC.element_to_be_clickable((By.CSS_SELECTOR, item))
             )
+        if mode == 'clickable' and method == 'XP':
+            element = WebDriverWait(driver, timeout=20).until(
+                EC.element_to_be_clickable((By.XPATH, item))
+            )
         return True
     
     except: return False
     
 
 # Select value from dropdown web element
-def select_from_dropdown(item, value, pause=PAUSE, driver=DRIVER):
+def select_from_dropdown(driver, pause, item, value):
 
     # Explicit wait for web element to be visible
-    if check_for_element(item, 'visible'):
+    if check_for_element(driver, item, 'visible'):
 
         # Select and print selection
         dropdown = Select(driver.find_element_by_id(item))
@@ -110,14 +109,17 @@ def select_from_dropdown(item, value, pause=PAUSE, driver=DRIVER):
 
 
 # Click web element
-def click_element(item, method='ID', pause=PAUSE, driver=DRIVER):
+def click_element(driver, pause, item, method='ID'):
 
     # Explicit wait for web element to be clickable
-    if check_for_element(item, 'clickable') and method == 'ID':
+    if check_for_element(driver, item, 'clickable') and method == 'ID':
         driver.find_element_by_id(item).click() # Click
 
-    elif check_for_element(item, 'clickable', 'CSS') and method == 'CSS':
+    elif check_for_element(driver, item, 'clickable', 'CSS') and method == 'CSS':
         driver.find_element_by_css_selector(item).click() # Click
+
+    elif check_for_element(driver, item, 'clickable', 'XP') and method == 'XP':
+        driver.find_element_by_xpath(item).click() # Click
     
     print(f'Clicked on {item}!')
     sleep(pause)
@@ -129,8 +131,10 @@ def downloading():
     files = sorted(os.listdir(os.getcwd()), key=os.path.getmtime)
     newest = files[-1]
 
-    if "crdownload" in newest: return True
-    else: return False
+    if 'crdownload' in newest or '06037C' not in newest: 
+        return True, newest;
+    else: 
+        return False, newest;
 
 
 # Quit browser once file is downloaded
@@ -138,12 +142,14 @@ def complete_download():
 
     os.chdir(DOWNLOADS)
     seconds = 0
-    while True:
 
-        if downloading():
+    for i in range(100):
+        proceed, newest = downloading()
+        
+        if proceed:
             time.sleep(1)
             seconds += 1
-            print(f'Still Downloading! --- {seconds} seconds')
+            print(f'Still Downloading! --- {seconds} seconds --- {newest}')
         
         else: 
             print('Download completed!')
@@ -151,28 +157,39 @@ def complete_download():
 
 
 # Click through FEMA MSC to download LA county NFHL data
-def extract_lacounty_nfhl(headless=False):
+def extract_lacounty_nfhl(pause, headless=False):
 
-    # Option to not display browser
+
+    # Create WebDriver object for Chrome browser
+    # Headless mode does not currently work lol
     if headless == True:
+        
         chrome_options = Options()
-        chrome_options.add_argument("--headless")   
+        chrome_options.add_argument("--headless")
+        DRIVER = webdriver.Chrome(chrome_options=chrome_options)
+
+    else: DRIVER = webdriver.Chrome()
+    PAUSE = pause
+
     
     # Open FEMA MSC website, which is regularly updated
     DRIVER.get('https://msc.fema.gov/portal/advanceSearch')
     DRIVER.maximize_window()
 
     # Search through 'Jurisdiction' option
-    select_from_dropdown('selstate', '06')
-    select_from_dropdown('selcounty', '06037')
-    select_from_dropdown('selcommunity', '06037C')
+    select_from_dropdown(DRIVER, PAUSE, 'selstate', '06')
+    select_from_dropdown(DRIVER, PAUSE, 'selcounty', '06037')
+    select_from_dropdown(DRIVER, PAUSE, 'selcommunity', '06037C')
 
-    click_element('mainSearch')
-    click_element('eff_root')
-    click_element('eff_nfhl_county_root')
+    click_element(DRIVER, PAUSE, 'mainSearch')
+    click_element(DRIVER, PAUSE, 'eff_root')
+    click_element(DRIVER, PAUSE, 'eff_nfhl_county_root')
 
     download = '#nfhl_county_list > tr:nth-child(1) > td:nth-child(5) > a'
-    click_element(download, method='CSS')
+    click_element(DRIVER, PAUSE, download, method='CSS')
+    # download = '//*[@id="nfhl_county_list"]/tr[1]/td[5]/a'
+    # click_element(DRIVER, PAUSE, download, method='XP')
+    sleep(10)
     
     complete_download()
     os.chdir(DOWNLOADS)
@@ -183,4 +200,4 @@ def extract_lacounty_nfhl(headless=False):
 
 
 # Execute main script
-extract_lacounty_nfhl()
+extract_lacounty_nfhl(1.5)
