@@ -59,7 +59,8 @@ bin = os.listdir()
 if 'chromedriver' not in bin:
     os.chdir(DOWNLOADS)
     wget.download('https://chromedriver.storage.googleapis.com/92.0.4515.43/chromedriver_mac64_m1.zip')
-    with ZipFile('chromedriver_mac64_m1.zip', 'r') as zipObj: zipObj.extractall()
+    with ZipFile('chromedriver_mac64_m1.zip', 'r') as zipObj: 
+        zipObj.extractall()
     subprocess.call(['chmod', 'u+x', DOWNLOADS + '/chromedriver'])
     os.system('sudo mv chromedriver ' + BIN)
     os.system('rm chromedriver_mac64_m1.zip')
@@ -184,7 +185,9 @@ def extract_lacounty_nfhl(headless=False):
     DRIVER.quit()
 
     os.chdir(DOWNLOADS)
-    with ZipFile('06037C_20210601.zip', 'r') as zipObj: zipObj.extractall()
+    with ZipFile('06037C_20210601.zip', 'r') as zipObj: 
+        zipObj.extractall()
+    os.system('rm 06037C_20210601.zip')
 
 
 # Execute main script
