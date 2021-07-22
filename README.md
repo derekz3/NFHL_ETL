@@ -10,12 +10,13 @@
 
 1. `git clone https://github.com/derekz3/NFHL_ETL.git pipeline`
 2. `cd pipeline`
-3. `pip3 install -r requirements.txt`
-4. `python3 -m venv pipe-test`
-5. `source pipe-test/bin/activate`
+3. `python3 -m venv pipe-test`
+4. `source pipe-test/bin/activate`
+5. `pip3 install -r requirements.txt`
 6. `python3 pipe.py`
 7. Enter password when prompted.
 
 *...and once you're done*
+
 8. `rm -r venv`
 9. Check `~/Downloads` for `06037C_20210601.zip`
