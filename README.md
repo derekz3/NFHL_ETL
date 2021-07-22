@@ -1,5 +1,7 @@
 # NFHL ETL Pipeline
 
+***
+
 ## Summary
 
 - **E**: The repo uses the Selenium WebDriver protocol, configured for the Google Chrome web browser, to scrape the National Flood Hazard Layer (NFHL) from the FEMA Map Service Center (MSC).
@@ -7,6 +9,8 @@
 - **L**: The GeoJSON file will be uploaded to a Google Cloud Storage bucket to further explore, clean and prepare the data for analysis.
 
 ***I'VE ONLY DONE 'E'--extract SO FAR***
+
+***
 
 ## Setup
 
