@@ -26,7 +26,7 @@ assert sys.version_info >= MIN_PYTHON,\
 # [Automate `sudo` with no password]
 
 
-# Current file structure:
+# Current file location:
 # Downloads > pipeline > pipe.py
 os.chdir("..")
 DOWNLOADS = os.getcwd()
