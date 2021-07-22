@@ -175,12 +175,11 @@ def extract_lacounty_nfhl(headless=False):
     click_element(download, method='CSS')
     
     complete_download()
-    DRIVER.quit()
-
     os.chdir(DOWNLOADS)
     with ZipFile('06037C_20210601.zip', 'r') as zipObj: 
         zipObj.extractall('nfhl_layers')
     os.system('rm 06037C_20210601.zip')
+    DRIVER.quit()
 
 
 # Execute main script
