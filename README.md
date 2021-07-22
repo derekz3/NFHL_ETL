@@ -23,4 +23,11 @@
 *...and once you're done*
 
 8. `rm -r pipe-test`
-9. Check `~/Downloads` for `06037C_20210601.zip`
+9. Check `~/Downloads` for `06037C_20210601.zip`  
+
+
+## Update `main` Branch
+
+1. git add -A
+2. git commit -m "[*commit message*]"
+3. git push origin main
