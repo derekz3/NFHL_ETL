@@ -16,13 +16,21 @@ from selenium.webdriver.support import expected_conditions as EC
 
 #---------------------------------Setup---------------------------------#
 
+
 # Require at least Python 3.7
 MIN_PYTHON = (3, 7)
 assert sys.version_info >= MIN_PYTHON,\
     f"requires Python {'.'.join([str(n) for n in MIN_PYTHON])} or newer"
 
 
+# Create virtual environment
+os.system('python3 -m venv pipe-test')
+os.system('source pipe-test/bin/activate')
+os.system('pip3 install -r requirements.txt')
+
+
 # [Automate `sudo` with no password]
+
 
 # Current file structure:
 # Downloads > pipeline > pipe.py
@@ -41,7 +49,7 @@ if CHROME != 'Google Chrome 92.0.4515.107': # If not, install
     os.system('rm googlechrome.dmg')
 
 
-# Set up for webdriver installation
+# Set up for webdriver download
 os.chdir('/usr/local/bin')
 BIN = os.getcwd()
 bin = os.listdir()
@@ -174,6 +182,9 @@ def extract_lacounty_nfhl(headless=False):
     
     complete_download()
     DRIVER.quit()
+
+    os.chdir(DOWNLOADS)
+    with ZipFile('06037C_20210601.zip', 'r') as zipObj: zipObj.extractall()
 
 
 # Execute main script
