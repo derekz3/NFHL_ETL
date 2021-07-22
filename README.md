@@ -13,7 +13,7 @@
 ## Run Pipeline
 
 1. `chmod +x nfhl.bash`
-2. ./nfhl.bash
+2. `./nfhl.bash`
 3. Enter password when prompted.
 4. Check `~/Downloads` for the `nfhl_layers` folder.  
 
