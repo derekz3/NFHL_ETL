@@ -1,6 +1,5 @@
 import os
 import sys
-import wget
 import time
 import subprocess
 from time import sleep
@@ -31,12 +30,12 @@ os.chdir("..")
 DOWNLOADS = os.getcwd()
 
 
-# Check that Chrome is installed
+# Check that Google Chrome is installed
 CHROME = os.popen(\
     '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version'\
     ).read().split('\n')[0].strip()
 if CHROME != 'Google Chrome 92.0.4515.107': # If not, install
-    wget.download('https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg')
+    os.system('wget https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg')
     os.system('open googlechrome.dmg')
     os.system('sudo cp -r /Volumes/Google\ Chrome/Google\ Chrome.app /Applications/')
     os.system('rm googlechrome.dmg')
@@ -51,7 +50,7 @@ bin = os.listdir()
 # Download Chrome webdriver executable for M1 MAC if needed
 if 'chromedriver' not in bin:
     os.chdir(DOWNLOADS)
-    wget.download('https://chromedriver.storage.googleapis.com/92.0.4515.43/chromedriver_mac64_m1.zip')
+    os.system('wget https://chromedriver.storage.googleapis.com/92.0.4515.43/chromedriver_mac64_m1.zip')
     with ZipFile('chromedriver_mac64_m1.zip', 'r') as zipObj: 
         zipObj.extractall()
     subprocess.call(['chmod', 'u+x', DOWNLOADS + '/chromedriver'])
