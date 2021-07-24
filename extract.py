@@ -15,18 +15,9 @@ from selenium.webdriver.support import expected_conditions as EC
 #---------------------------------Setup---------------------------------#
 
 
-# Require at least Python 3.7
-MIN_PYTHON = (3, 7)
-assert sys.version_info >= MIN_PYTHON,\
-    f"requires Python {'.'.join([str(n) for n in MIN_PYTHON])} or newer"
-
-
-# [Automate `sudo` with no password]
-
-
 # Current file location:
 # Downloads > pipeline > pipe.py
-os.chdir("../..")
+os.chdir("..")
 DOWNLOADS = os.getcwd()
 
 
@@ -54,6 +45,7 @@ if 'chromedriver' not in bin:
     with ZipFile('chromedriver_mac64_m1.zip', 'r') as zipObj: 
         zipObj.extractall()
     subprocess.call(['chmod', 'u+x', DOWNLOADS + '/chromedriver'])
+    # [Automate `sudo` with no password]
     os.system('sudo mv chromedriver ' + BIN)
     os.system('rm chromedriver_mac64_m1.zip')
 
