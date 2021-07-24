@@ -26,7 +26,7 @@ assert sys.version_info >= MIN_PYTHON,\
 
 # Current file location:
 # Downloads > pipeline > pipe.py
-os.chdir("..")
+os.chdir("../..")
 DOWNLOADS = os.getcwd()
 
 
