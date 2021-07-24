@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import subprocess
+from time import time
 from time import sleep
 from zipfile import ZipFile
 from selenium import webdriver
@@ -134,11 +135,11 @@ def complete_download():
     os.chdir(DOWNLOADS)
     seconds = 0
 
-    for i in range(100):
+    for i in range(60):
         proceed, newest = downloading()
         
         if proceed:
-            time.sleep(1)
+            sleep(1)
             seconds += 1
             print(f'Still Downloading! --- {seconds} seconds --- {newest}')
         
@@ -157,15 +158,20 @@ def extract_lacounty_nfhl(pause, headless=False):
         
         chrome_options = Options()
         chrome_options.add_argument("--headless")
-        DRIVER = webdriver.Chrome(chrome_options=chrome_options)
+        chrome_options.add_argument("--allow-insecure-localhost");
+        chrome_options.add_argument("--disable-gpu");
+        chrome_options.add_argument("--no-sandbox");
+        user_agent = 'I LIKE CHOCOLATE'
+        chrome_options.add_argument(f'user-agent={user_agent}')
+        DRIVER = webdriver.Chrome(options=chrome_options)
 
     else: DRIVER = webdriver.Chrome()
     PAUSE = pause
 
     
     # Open FEMA MSC website, which is regularly updated
-    DRIVER.get('https://msc.fema.gov/portal/advanceSearch')
     DRIVER.maximize_window()
+    DRIVER.get('https://msc.fema.gov/portal/advanceSearch')
 
     # Search through 'Jurisdiction' option
     select_from_dropdown(DRIVER, PAUSE, 'selstate', '06')
@@ -180,7 +186,6 @@ def extract_lacounty_nfhl(pause, headless=False):
     click_element(DRIVER, PAUSE, download, method='CSS')
     # download = '//*[@id="nfhl_county_list"]/tr[1]/td[5]/a'
     # click_element(DRIVER, PAUSE, download, method='XP')
-    sleep(10)
     
     complete_download()
     os.chdir(DOWNLOADS)
@@ -191,4 +196,8 @@ def extract_lacounty_nfhl(pause, headless=False):
 
 
 # Execute main script
+# extract_lacounty_nfhl(1.5, headless=True)
+t0 = time()
 extract_lacounty_nfhl(1.5)
+t1 = time()
+print(f'Extract function takes {t1-t0}')
