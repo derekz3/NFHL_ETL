@@ -29,15 +29,3 @@ python3 transform.py
 
 # conda deactivate
 # conda env remove --name pipe
-
-
-
-
-
-# conda create -p ./geo python --no-default-packages -y
-# conda activate /Users/$(id -un)/Downloads/pipeline/geo
-# conda config --env --add channels conda-forge
-# conda config --env --set channel_priority strict
-# conda install geopandas --prefix ./geo -y
-# conda deactivate
-# conda env remove -p ./geo
