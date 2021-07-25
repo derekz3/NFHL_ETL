@@ -1,63 +1,21 @@
+#!/usr/bin/python
+
+
 import os
 import sys
 import time
 import subprocess
 from time import time
 from time import sleep
+from pathlib import Path
 from zipfile import ZipFile
+import chromedriver_binary
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-
-#---------------------------------Setup---------------------------------#
-
-
-# Current file location:
-# Downloads > pipeline > pipe.py
-os.chdir("..")
-DOWNLOADS = os.getcwd()
-
-
-# Check that Google Chrome is installed
-CHROME = os.popen(\
-    '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version'\
-    ).read().split('\n')[0].strip()
-if CHROME != 'Google Chrome 92.0.4515.107': # If not, install
-    os.system('wget https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg')
-    os.system('open googlechrome.dmg')
-    os.system('sudo cp -r /Volumes/Google\ Chrome/Google\ Chrome.app /Applications/')
-    os.system('rm googlechrome.dmg')
-
-
-# Set up for webdriver download
-os.chdir('/usr/local/bin')
-BIN = os.getcwd()
-bin = os.listdir()
-
-
-# Download Chrome webdriver executable for M1 MAC if needed
-if 'chromedriver' not in bin:
-    os.chdir(DOWNLOADS)
-    os.system('wget https://chromedriver.storage.googleapis.com/92.0.4515.43/chromedriver_mac64_m1.zip')
-    with ZipFile('chromedriver_mac64_m1.zip', 'r') as zipObj: 
-        zipObj.extractall()
-    subprocess.call(['chmod', 'u+x', DOWNLOADS + '/chromedriver'])
-    # [Automate `sudo` with no password]
-    os.system('sudo mv chromedriver ' + BIN)
-    os.system('rm chromedriver_mac64_m1.zip')
-
-
-# Check if webdriver was successfully installed
-os.chdir(BIN)
-bin = os.listdir()
-print(bin)
-
-
-#--------------------------------Extract--------------------------------#
 
 
 # Check if element is usable by script
@@ -132,7 +90,8 @@ def downloading():
 # Quit browser once file is downloaded
 def complete_download():
 
-    os.chdir(DOWNLOADS)
+    # HOME = str(Path.home())
+    os.chdir('..')
     seconds = 0
 
     for i in range(60):
@@ -188,10 +147,13 @@ def extract_lacounty_nfhl(pause, headless=False):
     # click_element(DRIVER, PAUSE, download, method='XP')
     
     complete_download()
-    os.chdir(DOWNLOADS)
+    os.system('mv 06037C_20210601.zip pipeline')
+    os.chdir('pipeline')
     with ZipFile('06037C_20210601.zip', 'r') as zipObj: 
-        zipObj.extractall('nfhl_layers')
+        zipObj.extractall('sample')
     os.system('rm 06037C_20210601.zip')
+    os.chdir('sample')
+    os.system("find . -depth 1 -type f -not -name 'S_FLD_HAZ_AR*' -delete")
     DRIVER.quit()
 
 
