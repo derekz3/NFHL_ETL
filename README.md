@@ -1,7 +1,7 @@
 # NFHL ETL Pipeline  
 
 
-**DONE** : 'E'—extract and 'T'-transform so far 
+**DONE** : 'E'—extract and 'T'-transform so far  
 **NEXT** : 'Dockerize' these services + Deploy with Cloud Run
 
 
