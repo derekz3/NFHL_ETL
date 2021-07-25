@@ -1,0 +1,41 @@
+attrs @ file:///home/conda/feedstock_root/build_artifacts/attrs_1620387926260/work
+brotlipy==0.7.0
+certifi==2021.5.30
+cffi @ file:///Users/runner/miniforge3/conda-bld/cffi_1625835329396/work
+chromedriver-binary @ file:///Users/runner/miniforge3/conda-bld/python-chromedriver-binary_1623504254880/work
+click==7.1.2
+click-plugins==1.1.1
+cligj @ file:///home/conda/feedstock_root/build_artifacts/cligj_1622246659049/work
+cryptography @ file:///Users/runner/miniforge3/conda-bld/cryptography_1616851523607/work
+cycler==0.10.0
+decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1621187651333/work
+Fiona==1.8.20
+GDAL==3.3.1
+geopandas @ file:///home/conda/feedstock_root/build_artifacts/geopandas_1623249625470/work
+idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1609836280497/work
+joblib @ file:///home/conda/feedstock_root/build_artifacts/joblib_1612898609989/work
+kiwisolver @ file:///Users/runner/miniforge3/conda-bld/kiwisolver_1624925806517/work
+mapclassify @ file:///home/conda/feedstock_root/build_artifacts/mapclassify_1608686039411/work
+matplotlib @ file:///Users/runner/miniforge3/conda-bld/matplotlib-suite_1620506027623/work
+munch==2.5.0
+networkx==2.3
+numpy @ file:///Users/runner/miniforge3/conda-bld/numpy_1626648418679/work
+olefile @ file:///home/conda/feedstock_root/build_artifacts/olefile_1602866521163/work
+pandas==1.3.0
+Pillow @ file:///Users/runner/miniforge3/conda-bld/pillow_1625678080886/work
+pycparser @ file:///home/conda/feedstock_root/build_artifacts/pycparser_1593275161868/work
+pyOpenSSL @ file:///home/conda/feedstock_root/build_artifacts/pyopenssl_1608055815057/work
+pyparsing==2.4.7
+pyproj @ file:///Users/runner/miniforge3/conda-bld/pyproj_1623801978550/work
+PySocks @ file:///Users/runner/miniforge3/conda-bld/pysocks_1610291470465/work
+python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1626286286081/work
+pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1612179539967/work
+Rtree @ file:///Users/runner/miniforge3/conda-bld/rtree_1626987867021/work
+scikit-learn @ file:///Users/runner/miniforge3/conda-bld/scikit-learn_1619628730062/work
+scipy @ file:///Users/runner/miniforge3/conda-bld/scipy_1626684392794/work
+selenium @ file:///Users/runner/miniforge3/conda-bld/selenium_1610664552731/work
+Shapely @ file:///Users/runner/miniforge3/conda-bld/shapely_1622660863030/work
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
+threadpoolctl @ file:///home/conda/feedstock_root/build_artifacts/threadpoolctl_1626092076920/work
+tornado @ file:///Users/runner/miniforge3/conda-bld/tornado_1625488906146/work
+urllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1624634538755/work
