@@ -7,8 +7,8 @@
 
 ## Summary
 
-**E**: This repo uses the Selenium WebDriver protocol, configured for the Google Chrome web browser, to scrape the National Flood Hazard Layer (NFHL) from the FEMA Map Service Center (MSC).  
-**T**: Revelant layers will be selected from the NFHL data and converted to GeoJSON format.  
+**E**: This repo uses the `Selenium WebDriver protocol`, configured for the Google Chrome web browser, to scrape the National Flood Hazard Layer (NFHL) from the FEMA Map Service Center (MSC).  
+**T**: Revelant layers are selected from the NFHL data and converted to `GeoJSON` format via `geopandas`.  
 **L**: GeoJSON files will be uploaded to a Google Cloud Storage bucket to further explore, clean and prepare the data for analysis.
 
 
