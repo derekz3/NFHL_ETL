@@ -14,7 +14,7 @@
 
 ## Run Pipeline
 
-1. Start in your `~/Downloads` directory.
+1. Navigate to your `~/Downloads` directory in terminal.
 2. `git clone https://github.com/derekz3/NFHL_ETL.git pipeline`
 3. `cd pipeline`
 4. `chmod +x run.bash`
