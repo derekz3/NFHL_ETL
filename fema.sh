@@ -23,7 +23,7 @@ fi
 # Initialize global variables
 PAGE=53 # Start near end of results to test process
 LIMIT=100 # Number of results returned per request
-FILTER="" # Additional filters (e.g. get 100 year flood plain)
+FILTER="" # Additional filters (e.g. get 100 year flood plain) <----- Does not work lol
 BASE_PRE="https://hazards.fema.gov/gis/nfhl/rest/services/public/NFHL/MapServer/28/query?where=DFIRM_ID=%2706037C%27"
 BASE_SUF="&f=geojson&resultRecordCount=100&resultOffset="
 
