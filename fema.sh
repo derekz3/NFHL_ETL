@@ -1,10 +1,6 @@
 #!/bin/bash
 
 
-# Install dependencies
-pip3 install glob2
-
-
 # Final output file
 FILE=out.json
 if [[ -f "$FILE" ]]; then
@@ -60,7 +56,7 @@ echo "Begin post-processing batches."
 # Combine batches into one json (dictionary) in conda environment
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate pipe
-python3 post.py
+python3 fema.py
 echo "Job done!"
 
 

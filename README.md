@@ -20,8 +20,8 @@
 4. `chmod +x build.sh crawl.sh fema.sh`
 5. `./build.sh` to build environment.
 6. Enter password when prompted.
-7. Method 1: `./crawl.sh` to implement web crawler.
-8. Method 2: `./fema.sh` to implement FEMA API requests. 
+7. Method 1: `./crawl.sh` to implement web crawler. (Check `polygon.csv` for output)
+8. Method 2: `./fema.sh` to implement FEMA API requests. (Check `out.json` for output)
 
 
 ## Update '`main`' Branch

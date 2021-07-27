@@ -18,9 +18,8 @@ conda activate pipe
 python3 crawl.py
 
 
-cd sample
 # Convert flood zone data from shapefile to GeoJSON-encoded geographies within a CSV
-ogr2ogr -f csv -dialect sqlite -sql "select AsGeoJSON(geometry) AS geom, * from S_FLD_HAZ_AR" polygon.csv S_FLD_HAZ_AR.shp
+ogr2ogr -f csv -dialect sqlite -sql "select AsGeoJSON(geometry) AS geom, * from S_FLD_HAZ_AR" polygon.csv sample/S_FLD_HAZ_AR.shp
 
 
 # conda deactivate
