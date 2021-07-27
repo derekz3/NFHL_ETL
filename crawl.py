@@ -4,7 +4,6 @@
 import os
 import sys
 import time
-import glob
 # import geopandas
 import subprocess
 from time import time
