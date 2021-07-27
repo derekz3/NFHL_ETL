@@ -22,5 +22,8 @@ python3 crawl.py
 ogr2ogr -f csv -dialect sqlite -sql "select AsGeoJSON(geometry) AS geom, * from S_FLD_HAZ_AR" polygon.csv sample/S_FLD_HAZ_AR.shp
 
 
+# Next task: Upload csv to BigQuery
+
+
 # conda deactivate
 # conda env remove --name pipe

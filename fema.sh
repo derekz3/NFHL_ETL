@@ -60,6 +60,9 @@ python3 fema.py
 echo "Job done!"
 
 
+# Next task: Convert geojson to csv
+
+
 # Upload CSV file to Google Cloud Storage (GCS) bucket
     # Project ID: genuine-episode-317014
     # gsutil config -- how to automate?
