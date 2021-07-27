@@ -11,7 +11,7 @@ if [[ "$CONDA" != *"$CREQ"* ]]; then
 fi
 
 
-# Create script environment if needed - empty conda environment + configs
+# Create environment - empty conda environment + configs
 CONDA_ENVS=$(conda env list)
 ENV='pipe'
 if [[ "$CONDA_ENVS" != *"$ENV"* ]]; then
