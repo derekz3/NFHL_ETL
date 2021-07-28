@@ -20,8 +20,10 @@
 4. `chmod +x build.sh crawl.sh fema.sh`
 5. `./build.sh` to build environment.
 6. Enter password when prompted.
-7. Method 1: `./crawl.sh` to implement web crawler. (Check `polygon.csv` for output)
-8. Method 2: `./fema.sh` to implement API requests. (Check `out.json` for output)
+7. Method 1: `./crawl.sh` to implement web crawler.
+8. Method 2: `./fema.sh` to implement API requests.
+9. Check `polygon.csv` for CSV to upload
+10. Check `shape` for shapefiles to view in `QGIS.`
 
 
 ## Update '`main`' Branch
