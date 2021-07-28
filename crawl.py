@@ -151,9 +151,9 @@ def extract_lacounty_nfhl(pause, headless=False):
     os.system('mv 06037C_20210601.zip pipeline')
     os.chdir('pipeline')
     with ZipFile('06037C_20210601.zip', 'r') as zipObj: 
-        zipObj.extractall('sample')
+        zipObj.extractall('shape')
     os.system('rm 06037C_20210601.zip')
-    os.chdir('sample')
+    os.chdir('shape')
     # Delete all files besides those associated with flood zones ... for now
     os.system("find . -depth 1 -type f -not -name 'S_FLD_HAZ_AR*' -delete")
     DRIVER.quit()
@@ -168,7 +168,7 @@ print(f'Extract function takes {t1-t0}')
 
 
 # Query data prior to geojson:
-# gdf = geopandas.read_file('sample/S_FLD_HAZ_AR.shp')
+# gdf = geopandas.read_file('shape/S_FLD_HAZ_AR.shp')
 # print(gdf.columns.tolist())
 # print(gdf.shape)
 # print(gdf.FLD_ZONE.value_counts())
@@ -182,7 +182,7 @@ print(f'Extract function takes {t1-t0}')
 #             ]
 # print(gdf_100yr.shape)
 # print(gdf_100yr.FLD_ZONE.value_counts())
-# gdf_100yr.to_file('sample/100yr.geojson', driver='GeoJSON')
+# gdf_100yr.to_file('shape/100yr.geojson', driver='GeoJSON')
 
 
 # gdf_500yr = gdf.loc[
@@ -191,7 +191,7 @@ print(f'Extract function takes {t1-t0}')
 # print(gdf_500yr.shape)
 # print(gdf_500yr.FLD_ZONE.value_counts())
 # print(gdf_500yr.ZONE_SUBTY.value_counts())
-# gdf_500yr.to_file('sample/500yr.geojson', driver='GeoJSON')
+# gdf_500yr.to_file('shape/500yr.geojson', driver='GeoJSON')
 
 
 # gdf_urban = gdf.loc[
@@ -200,4 +200,4 @@ print(f'Extract function takes {t1-t0}')
 # print(gdf_urban.shape)
 # print(gdf_urban.FLD_ZONE.value_counts())
 # print(gdf_urban.ZONE_SUBTY.value_counts())
-# gdf_urban.to_file('sample/urban.geojson', driver='GeoJSON')
+# gdf_urban.to_file('shape/urban.geojson', driver='GeoJSON')

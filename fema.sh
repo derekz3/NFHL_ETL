@@ -1,23 +1,25 @@
 #!/bin/bash
 
 
-# Final output file
-# FILE=out.json
-# if [[ -f "$FILE" ]]; then
-#     rm ${FILE}
-#     touch ${FILE}
-# else
-#     touch ${FILE}
-# fi
-
-
 # Batch directory (intermediate output)
-DIR=batches
-if [[ -d "$DIR" ]]; then
-    find ${DIR} -mindepth 1 -delete
+if [[ -d batches ]]; then
+    find batches -mindepth 1 -delete
 else
-    mkdir ${DIR}
+    mkdir batches
 fi
+
+
+# Shapefile directory
+if [[ -d shape ]]; then
+    find shape -mindepth 1 -delete
+else
+    mkdir shape
+fi
+
+
+# Reset output files and directories
+if [[ -f polygon.csv ]]; then rm polygon.csv; fi
+if [[ -f polygon.json ]]; then rm polygon.json; fi
 
 
 # Initialize global variables
@@ -38,8 +40,8 @@ do
     if (( $LEN > 42 )); then # If response is greater than 42 chars, query is not empty
         # Return full set of features, including geography, and write to batch file
         FULL_QUERY="${BASE_PRE}${FILTER}&outFields=*&outSR=4326${BASE_SUF}${COUNT}"
-        touch "${DIR}/batch${PAGE}.json"
-        curl -s $FULL_QUERY >> "${DIR}/batch${PAGE}.json"
+        touch "batches/batch${PAGE}.json"
+        curl -s $FULL_QUERY >> "batches/batch${PAGE}.json"
         # Report readable status
         echo "p.${PAGE} starts at item ${COUNT}."
         echo "p.${PAGE} complete ----------> ${COUNT} flood zones loaded!"
@@ -59,17 +61,8 @@ conda activate pipe
 python3 fema.py
 
 
-# Shapefile directory
-DIR=shape
-if [[ -d "$DIR" ]]; then
-    find ${DIR} -mindepth 1 -delete
-else
-    mkdir ${DIR}
-fi
-
-
 # Convert GeoJSON to shapefile
-ogr2ogr -f "ESRI Shapefile" ${DIR}/polygon.shp out.json
+ogr2ogr -f "ESRI Shapefile" shape/polygon.shp polygon.json
 
 
 # Convert shapefile to GeoJSON-encoded geographies within a CSV
@@ -77,14 +70,11 @@ ogr2ogr -f csv -dialect sqlite -sql "select AsGeoJSON(geometry) AS geom, * from 
 echo "Job done!"
 
 
-# Next task: Convert geojson to csv
-
-
 # Upload CSV file to Google Cloud Storage (GCS) bucket
     # Project ID: genuine-episode-317014
     # gsutil config -- how to automate?
     # gsutil mb -l us-east4 gs://nfhlbucket
-    # gsutil -m cp sample/polygon.csv gs://nfhlbucket
+    # gsutil -m cp polygon.csv gs://nfhlbucket
 
 
 # Upload CSV in GCS to BQ
@@ -95,3 +85,7 @@ echo "Job done!"
 
 # bq rm -r -f -d genuine-episode-317014:nfhlbq
 # gsutil rm -r gs://nfhlbucket
+
+
+# conda deactivate
+# conda env remove --name pipe
