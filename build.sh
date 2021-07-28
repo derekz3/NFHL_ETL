@@ -26,6 +26,7 @@ if [[ "$CONDA_ENVS" != *"$ENV"* ]]; then
   conda install --name pipe python-chromedriver-binary -y
   conda install --name pipe selenium -y
   conda install --name pipe fiona -y
+  conda install --name pipe gdal -y
   conda install --name pipe geopandas -y
 fi
 # If you wish to explore in Jupyter Notebooks:
