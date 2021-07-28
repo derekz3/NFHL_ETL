@@ -20,8 +20,14 @@ for index, batch in enumerate(batches):
     f.close()
 print(f"Total: {len(out)}")
 
-with open("out.json", "w+") as f:
-    json.dump({"type": "FeatureCollection", \
-               "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4269" } }, \
-               "features": out}, f, indent=4)
+
+with open("out.json", 'w+') as f:
+    f.write('\n'.join(map(json.dumps, out)))
     f.close()
+
+
+# with open("out.json", "w+") as f:
+#     json.dump({"type": "FeatureCollection", \
+#                "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::4269" } }, \
+#                "features": out}, f, indent=2)
+#     f.close()

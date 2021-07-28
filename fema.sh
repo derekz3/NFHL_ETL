@@ -2,13 +2,13 @@
 
 
 # Final output file
-FILE=out.json
-if [[ -f "$FILE" ]]; then
-    rm ${FILE}
-    touch ${FILE}
-else
-    touch ${FILE}
-fi
+# FILE=out.json
+# if [[ -f "$FILE" ]]; then
+#     rm ${FILE}
+#     touch ${FILE}
+# else
+#     touch ${FILE}
+# fi
 
 
 # Batch directory (intermediate output)
@@ -16,7 +16,7 @@ DIR=batches
 if [[ -d "$DIR" ]]; then
     find ${DIR} -mindepth 1 -delete
 else
-    mkdir batches
+    mkdir ${DIR}
 fi
 
 
@@ -57,6 +57,23 @@ echo "Begin post-processing batches."
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate pipe
 python3 fema.py
+
+
+# Shapefile directory
+DIR=shape
+if [[ -d "$DIR" ]]; then
+    find ${DIR} -mindepth 1 -delete
+else
+    mkdir ${DIR}
+fi
+
+
+# Convert GeoJSON to shapefile
+ogr2ogr -f "ESRI Shapefile" ${DIR}/polygon.shp out.json
+
+
+# Convert shapefile to GeoJSON-encoded geographies within a CSV
+ogr2ogr -f csv -dialect sqlite -sql "select AsGeoJSON(geometry) AS geom, * from polygon" polygon.csv shape/polygon.shp
 echo "Job done!"
 
 
