@@ -26,7 +26,7 @@ if [[ "$CHROME" != *"$GREQ"* ]]; then
 fi
 
 
-# Run python scripts in conda environment
+# Run crawl script in conda environment
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate pipe
 python3 crawl.py
