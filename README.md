@@ -18,7 +18,7 @@
 2. Clone repo: `git clone https://github.com/derekz3/NFHL_ETL.git pipeline`
 3. Enter repo: `cd pipeline`
 4. Build Docker image: `docker build -t ignite/conda:pipe .`
-5. Run Docker image: `docker run -it ignite/conda:pipe /bin/bash`
+5. Run Docker image: `docker run -it --name=piping ignite/conda:pipe /bin/bash`
 6. Run script: `python3 fema.py`
 7. Get Output file: `sudo docker cp piping:/app/polygon.csv .`
 9. Clear: `docker rm $(docker ps -a -q) && docker rmi -f ignite/conda:pipe`
