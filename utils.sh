@@ -1,4 +1,5 @@
 #!/bin/bash
+# File for common bash utility functions
 
 
 # Empty directory (or create if non-existant)
@@ -30,4 +31,5 @@ function report {
     echo "p.${PAGE}: Starts at item ${COUNT}."
     echo "p.${PAGE}: $(( $COUNT + $LIMIT )) flood zones loaded!"
     echo "p.${PAGE}: ${FULL_QUERY}"
+    echo ""
 }

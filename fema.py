@@ -1,15 +1,26 @@
 #!/usr/bin/env python
-import os
 import sys
 import json
 import glob
-from pathlib import Path
+from subprocess import Popen, PIPE
 print(sys.executable)
 
 
-# Get directories
-app = os.getcwd()
-home = str(Path.home())
+# Run bash script from python with real-time output
+def prun(command):
+    procExe = Popen(command, stdout=PIPE, stderr=PIPE)
+    while procExe.poll() is None:
+        line = procExe.stdout.readline()
+        # Decode utf-8 and workaround dumb formatting
+        line = line.decode('utf-8')[:-1].replace('"','')
+        print(line)
+    stdout, stderr = procExe.communicate()
+    if stderr: print(f"There was error: {stderr}")
+
+
+# Load data from API calls
+prun(['bash', '-c', 'source fema.sh && call 53 06037C'])
+print("Begin post-processing pages.")
 
 
 # Initialize global variables/data
@@ -33,5 +44,10 @@ with open("polygon.json", 'w+') as f:
     f.write('\n'.join(map(json.dumps, out)))
     f.close()
 
-os.system('ogr2ogr -f "ESRI Shapefile" shape/polygon.shp polygon.json')
-os.system('ogr2ogr -f csv -dialect sqlite -sql "select AsGeoJSON(geometry) AS geom, * from polygon" polygon.csv shape/polygon.shp')
+
+# Convert GeoJSON to shapefile
+prun(['bash', '-c', 'export CPL_LOG=/dev/null && ogr2ogr -f "ESRI Shapefile" shape/polygon.shp polygon.json'])
+
+
+# Convert shapefile to GeoJSON-encoded geographies within a CSV
+prun(['bash', '-c', 'ogr2ogr -f csv -dialect sqlite -sql "select AsGeoJSON(geometry) AS geom, * from polygon" polygon.csv shape/polygon.shp'])
