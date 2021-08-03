@@ -20,7 +20,8 @@
 4. Build Docker image: `docker build -t ignite/conda:pipe .`
 5. Run Docker image: `docker run -it --name=piping ignite/conda:pipe /bin/bash`
 6. Run script: `python3 fema.py`
-7. Get Output file: `sudo docker cp piping:/app/polygon.csv .`
+7. Get output file 1: `sudo docker cp piping:/app/polygon.csv .`
+8. Get output file 1: `sudo docker cp piping:/app/polygon.json .`
 9. Clear: `docker rm $(docker ps -a -q) && docker rmi -f ignite/conda:pipe`
 
 
