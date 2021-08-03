@@ -82,6 +82,6 @@ RUN echo "conda activate pipe" >> ~/.bashrc
 SHELL ["/bin/bash", "--login", "-c"]
 
 # The code to run when container is started:
-COPY fema.py fema.sh utils.sh entrypoint.sh ./
+COPY app/. ./
 RUN chmod u+x entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]

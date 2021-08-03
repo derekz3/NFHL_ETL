@@ -7,10 +7,14 @@ source utils.sh
 : '
 docker build -t ignite/conda:pipe .
 
-docker run -it ignite/conda:pipe /bin/bash
-python3 fema.py
+docker run -it --name=piping --mount source=volume,target=/app ignite/conda:pipe /bin/bash
+docker run -d --name=copying -p 3000:3000 ignite/conda:pipe -v /tmp:/app/transfer
 
+python3 main.py
 docker rm $(docker ps -a -q) && docker rmi -f ignite/conda:pipe
+
+sudo docker cp piping:/app/polygon.csv .
+sudo docker cp piping:/app/polygon.json .
 '
 
 
@@ -56,16 +60,6 @@ function call {
         fi
     done
 }
-
-
-# Initial, local approach
-# Combine pages into one json (dictionary)
-# echo "Begin post-processing pages."
-# source ~/miniconda3/etc/profile.d/conda.sh
-# conda init bash
-# conda activate pipe
-# python3 fema.py
-# echo "Job done!"
 
 
 # Upload CSV file to Google Cloud Storage (GCS) bucket

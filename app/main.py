@@ -7,6 +7,7 @@ print(sys.executable)
 
 
 # Run bash script from python with real-time output
+# https://stackoverflow.com/questions/803265/getting-realtime-output-using-subprocess
 def prun(command):
     procExe = Popen(command, stdout=PIPE, stderr=PIPE)
     while procExe.poll() is None:
@@ -19,7 +20,7 @@ def prun(command):
 
 
 # Load data from API calls
-prun(['bash', '-c', 'source fema.sh && call 53 06037C'])
+prun(['bash', '-c', 'source main.sh && call 53 06037C'])
 print("Begin post-processing pages.")
 
 
