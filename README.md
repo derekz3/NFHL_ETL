@@ -14,13 +14,13 @@
 
 ## Run Pipeline
 
-1. Prerequisites: [`Docker`](https://docs.docker.com/engine/install/) is installed.
+1. Prerequisites: [Docker](https://docs.docker.com/engine/install/) is installed.
 2. Clone repo: `git clone https://github.com/derekz3/NFHL_ETL.git pipeline`
 3. Enter repo: `cd pipeline`
 4. Build Docker image: `docker build -t ignite/conda:pipe .`
 5. Run Docker image: `docker run -it --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash`
 6. Run script: `python3 fema.py`
-7. Output files located in `/pipeline/out`. View `/pipeline/out/shape/polygon.shp` in QGIS.
+7. Output files located in `/pipeline/out`. View `/pipeline/out/shape/polygon.shp` in [QGIS](https://qgis.org/en/site/forusers/download.html).
 9. Clear: `docker rm $(docker ps -a -q) && docker rmi -f ignite/conda:pipe`
 
 
