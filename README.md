@@ -14,7 +14,7 @@
 
 ## Run Pipeline
 
-1. Prerequisites: [`Docker`](https://docs.docker.com/engine/install/)
+1. Prerequisites: [`Docker`](https://docs.docker.com/engine/install/) is installed.
 2. Clone repo: `git clone https://github.com/derekz3/NFHL_ETL.git pipeline`
 3. Enter repo: `cd pipeline`
 4. Build Docker image: `docker build -t ignite/conda:pipe .`
