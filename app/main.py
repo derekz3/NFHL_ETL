@@ -41,14 +41,20 @@ print(f"Total: {len(out)}")
 
 
 # Convert list elements to json strings and write to file
-with open("polygon.json", 'w+') as f:
+with open("out/polygon.json", 'w+') as f:
     f.write('\n'.join(map(json.dumps, out)))
     f.close()
 
 
 # Convert GeoJSON to shapefile
-prun(['bash', '-c', 'export CPL_LOG=/dev/null && ogr2ogr -f "ESRI Shapefile" shape/polygon.shp polygon.json'])
+prun(['bash', '-c', 'export CPL_LOG=/dev/null && ogr2ogr -f "ESRI Shapefile" shape/polygon.shp out/polygon.json'])
 
 
 # Convert shapefile to GeoJSON-encoded geographies within a CSV
-prun(['bash', '-c', 'ogr2ogr -f csv -dialect sqlite -sql "select AsGeoJSON(geometry) AS geom, * from polygon" polygon.csv shape/polygon.shp'])
+prun(['bash', '-c', 'ogr2ogr -f csv -dialect sqlite -sql "select AsGeoJSON(geometry) AS geom, * from polygon" out/polygon.csv shape/polygon.shp'])
+
+
+# Copy files to host machine
+prun(['bash', '-c', 'cp out/polygon.csv /out/polygon.csv'])
+prun(['bash', '-c', 'cp out/polygon.json /out/polygon.json'])
+prun(['bash', '-c', 'cp -R shape /out/shape'])

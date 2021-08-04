@@ -6,15 +6,9 @@ source utils.sh
 # Clean build: ... build --no-cache -t ...
 : '
 docker build -t ignite/conda:pipe .
-
-docker run -it --name=piping --mount source=volume,target=/app ignite/conda:pipe /bin/bash
-docker run -d --name=copying -p 3000:3000 ignite/conda:pipe -v /tmp:/app/transfer
-
+docker run -it --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
 python3 main.py
 docker rm $(docker ps -a -q) && docker rmi -f ignite/conda:pipe
-
-sudo docker cp piping:/app/polygon.csv .
-sudo docker cp piping:/app/polygon.json .
 '
 
 
@@ -22,6 +16,7 @@ sudo docker cp piping:/app/polygon.json .
 function call {
 
     # Reset output files and directories
+    empty out
     empty pages
     empty shape
     remove polygon.csv
