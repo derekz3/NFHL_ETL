@@ -1,7 +1,7 @@
 # NFHL ETL Pipeline  
 
 
-**DONE** : 'E'—extract and 'T'-transform, Docker
+**DONE** : 'E'—extract and 'T'-transform, Docker  
 **NEXT** : Deploy service with Cloud Run
 
 
@@ -22,3 +22,5 @@
 6. Run script: `python3 fema.py`
 7. Output files located in `/pipeline/out`. View `/pipeline/out/shape/polygon.shp` in [QGIS](https://qgis.org/en/site/forusers/download.html).
 9. Clear: `docker rm $(docker ps -a -q) && docker rmi -f ignite/conda:pipe`
+
+<br>
