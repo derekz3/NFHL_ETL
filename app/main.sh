@@ -6,9 +6,8 @@ source utils.sh
 # Clean build: ... build --no-cache -t ...
 : '
 docker build -t ignite/conda:pipe .
-docker run -it --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
-python3 main.py
-docker rm $(docker ps -a -q) && docker rmi -f ignite/conda:pipe
+docker run -it --rm --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
+docker rmi -f ignite/conda:pipe
 '
 
 

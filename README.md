@@ -19,8 +19,7 @@
 3. Enter repo: `cd pipeline`
 4. Build Docker image: `docker build -t ignite/conda:pipe .`
 5. Run Docker image: `docker run -it --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash`
-6. Run script: `python3 fema.py`
-7. Output files located in `/pipeline/out`. View `/pipeline/out/shape/polygon.shp` in [QGIS](https://qgis.org/en/site/forusers/download.html).
-9. Clear: `docker rm $(docker ps -a -q) && docker rmi -f ignite/conda:pipe`
+6. Output files located in `/pipeline/out`. View `/pipeline/out/shape/polygon.shp` in [QGIS](https://qgis.org/en/site/forusers/download.html).
+7. Delete Docker image: docker rmi -f ignite/conda:pipe`
 
 <br>

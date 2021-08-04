@@ -81,7 +81,9 @@ RUN conda env create --file environment.yml
 RUN echo "conda activate pipe" >> ~/.bashrc
 SHELL ["/bin/bash", "--login", "-c"]
 
-# The code to run when container is started:
+# Copy code needed to run when container is started:
 COPY app/. ./
+
+# Give permissions to any command through entrypoint
 RUN chmod u+x entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]
