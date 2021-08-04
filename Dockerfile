@@ -73,16 +73,23 @@ RUN apt-get update && \
 # Move into app directory
 WORKDIR /app
 
-# Create the environment:
+# Copy code needed to run when container is started
+COPY app/. ./
 COPY environment.yml .
+
+# Create the conda environment
 RUN conda env create --file environment.yml
 
-# Make RUN commands use the new environment:
+# Make RUN commands use the new conda environment
 RUN echo "conda activate pipe" >> ~/.bashrc
 SHELL ["/bin/bash", "--login", "-c"]
 
-# Copy code needed to run when container is started:
-COPY app/. ./
+# Dynamically run on given DFIRM-ID and starting page
+ARG DFIRM=06037C
+ENV DFIRM ${DFIRM}
+ARG JUMP=0
+ENV JUMP ${JUMP}
+RUN echo "python3 main.py nfhl ${DFIRM} ${JUMP}" >> entrypoint.sh
 
 # Give permissions to any command through entrypoint
 RUN chmod u+x entrypoint.sh

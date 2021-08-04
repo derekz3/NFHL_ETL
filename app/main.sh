@@ -3,13 +3,13 @@ source utils.sh
 
 
 # DOCKER COMMANDS
-# Clean build: ... build --no-cache -t ...
+# Clean build: docker build --no-cache -t ignite/conda:pipe .
+# Change county: docker build -t ignite/conda:pipe --build-arg DFIRM=06111C --build-arg JUMP=10 .
 : '
 docker build -t ignite/conda:pipe .
 docker run -it --rm --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
 docker rmi -f ignite/conda:pipe
 '
-
 
 # Pagination strategy for FEMA API calls
 function call {
@@ -71,7 +71,3 @@ function call {
 
 # bq rm -r -f -d genuine-episode-317014:nfhlbq
 # gsutil rm -r gs://nfhlbucket
-
-
-# conda deactivate
-# conda env remove --name pipe

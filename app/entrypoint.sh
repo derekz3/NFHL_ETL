@@ -4,7 +4,7 @@
 set -eo pipefail
 # set -euxo pipefail
 
-# Activate conda environment and run main.py
+# `exec "$@"` to let the following process take over
+
+# Activate conda environment
 conda activate pipe
-python3 main.py
-# exec "$@" to let the following process take over
