@@ -17,12 +17,12 @@
 1. Prerequisites: [Docker](https://docs.docker.com/engine/install/) is installed.
 2. Clone repo: `git clone https://github.com/derekz3/NFHL_ETL.git pipeline`
 3. Enter repo: `cd pipeline`
-4. Build Docker image: `docker build -t ignite/conda:pipe [--build args] .`
-    - `DFIRM`: Default is Los Angeles County. Change to any county's FEMA DFIRM-ID.  
-    - `JUMP`: Default is 0, i.e. start from the beginning. Jump ahead for test purposes.  
-    - Example: `docker build -t ignite/conda:pipe --build-arg DFIRM=06111C --build-arg JUMP=10 .`
-5. Run Docker image: `docker run -it --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash`
-6. Output files located in `/pipeline/out`. View `/pipeline/out/shape/polygon.shp` in [QGIS](https://qgis.org/en/site/forusers/download.html).
-7. Delete Docker image: docker rmi -f ignite/conda:pipe`
+4. Run pipeline: `chmod +x run.sh && ./run.sh pipeline [-d DFIRM-ID] [-j INDEX]`
+    - `-d, --DFIRM`: Default is Los Angeles County. Change to any county's FEMA DFIRM-ID.  
+    - `-j, --JUMP`: Default is 0, i.e. start from the beginning. Jump ahead by `(INDEX * 100)` results for test purposes.  
+    - Example: `chmod +x run.sh && ./run.sh pipeline -d 6`
+5. Output files located in `/pipeline/out`. View `/pipeline/out/shape/polygon.shp` in [QGIS](https://qgis.org/en/site/forusers/download.html).
+6. Delete Docker image: `docker rmi -f ignite/conda:pipe`  
 
 <br>
+***
