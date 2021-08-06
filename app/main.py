@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import os
 import sys
 import json
 import glob
@@ -64,7 +63,6 @@ def nfhl(dfirm, jump):
     run(['bash', '-c', 'ogr2ogr -f csv -dialect sqlite -sql "select AsGeoJSON(geometry) AS geom, \
         * from polygon" out/polygon.csv shape/polygon.shp'], False)
     print("shapefile converted to CSV.")
-    # print(os.system("ls out"))
 
     
     # Reformat CSV file to format needed for React app
