@@ -19,8 +19,8 @@ def run(command, verbose=True):
             line = line.decode('utf-8')[:-1].replace('"','')
             print(line)
             
-    stdout, stderr = procExe.communicate()
-    if stderr: print(f"There was error: {stderr}")
+    # stdout, stderr = procExe.communicate()
+    # if stderr: print(f"There was error: {stderr}")
 
 
 def nfhl(dfirm, jump):
@@ -28,7 +28,7 @@ def nfhl(dfirm, jump):
     # Load data from API calls
     nfhl_loc = 'source main.sh && call ' + str(jump) + ' ' + str(dfirm)
     run(['bash', '-c', nfhl_loc])
-    print("Post-processing data.\n")
+    print("\nPost-processing data.\n")
 
 
     # Initialize global variables/data
@@ -58,7 +58,6 @@ def nfhl(dfirm, jump):
         echo "JSON converted to shapefile."'])
     
 
-
     # Convert shapefile to GeoJSON-encoded geographies within a CSV
     run(['bash', '-c', 'ogr2ogr -f csv -dialect sqlite -sql "select AsGeoJSON(geometry) AS geom, \
         * from polygon" out/polygon.csv shape/polygon.shp && \
@@ -68,8 +67,8 @@ def nfhl(dfirm, jump):
     # Copy files to host machine
     run(['bash', '-c', 'cp out/polygon.csv /out/polygon.csv'], False)
     run(['bash', '-c', 'cp out/polygon.json /out/polygon.json'], False)
-    run(['bash', '-c', 'cp -R shape /out/shape && \
-        echo "Files copied from container to host."'], False)
+    run(['bash', '-c', 'cp -R shape /out/shape'], False)
+    print("Files copied from container to host.")
 
 
 # Make functions runnable from terminal

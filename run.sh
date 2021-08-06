@@ -22,8 +22,8 @@ function pipeline {
 
     # Reset docker image and container + output directory as needed
     # Reference: https://stackoverflow.com/questions/38576337/how-to-execute-a-bash-command-only-if-a-docker-container-with-a-given-name-does
-    ! docker container inspect piping &> /dev/null || docker rm -f -v piping
-    ! docker image inspect ignite/conda:pipe &> /dev/null || docker rmi -f ignite/conda:pipe
+    ! docker container inspect piping &> /dev/null || docker rm -f -v piping &> /dev/null
+    ! docker image inspect ignite/conda:pipe &> /dev/null || docker rmi -f ignite/conda:pipe &> /dev/null
     clear
 
     # Initialize Docker build command
@@ -31,7 +31,7 @@ function pipeline {
 
     # Check if options were passed
     if [ ! $# -eq 0 ]; then
-        echo "options were passed"
+        echo "Options were passed:"
 
         # Transform long options to short ones
         for arg in "$@"; do
@@ -52,11 +52,11 @@ function pipeline {
             case $opt in
                 d) 
                     BUILD_STR="${BUILD_STR} --build-arg DFIRM=$OPTARG" 
-                    # echo "-d was triggered, Parameter: $OPTARG" >&2
+                    echo "-d was triggered, Parameter: $OPTARG" >&2
                     ;;
                 j) 
                     BUILD_STR="${BUILD_STR} --build-arg JUMP=${OPTARG}" 
-                    # echo "-j was triggered, Parameter: $OPTARG" >&2
+                    echo "-j was triggered, Parameter: $OPTARG" >&2
                     ;;
                 \?)
                     echo "Invalid option: -$OPTARG" >&2
@@ -70,7 +70,7 @@ function pipeline {
 
     # Build container from specified docker image
     BUILD() { echo "$BUILD_STR ."; }
-    echo "$BUILD_STR ."
+    echo "$BUILD_STR ." && echo ""
     eval $(BUILD)
 
     # Run docker container in interactive terminal
