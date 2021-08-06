@@ -17,11 +17,12 @@
 1. Prerequisites: [Docker](https://docs.docker.com/engine/install/) is installed.
 2. Clone repo: `git clone https://github.com/derekz3/NFHL_ETL.git pipeline`
 3. Enter repo: `cd pipeline`
-4. Run pipeline: `chmod +x run.sh && ./run.sh pipeline [-d DFIRM-ID] [-j INDEX]`
+4. Make pipeline executable: `chmod +x run.sh`
+5. Run pipeline: `./run.sh pipeline [-d DFIRM-ID] [-j INDEX]`
     - `-d, --DFIRM`:  Default is Los Angeles County. Change to any county's FEMA DFIRM-ID.  
     - `-j, --JUMP`:  Default is 0. Jump ahead by `(INDEX * 100)` results for testing purposes.  
-    - Example: `chmod +x run.sh && ./run.sh pipeline -d 06111C -j 30`
-5. Output files located in `/pipeline/out`. View `/pipeline/out/shape/polygon.shp` in [QGIS](https://qgis.org/en/site/forusers/download.html).
-6. Delete Docker image: `docker rmi -f ignite/conda:pipe`  
+    - Example: `./run.sh pipeline -d 06111C -j 30`
+6. Output files located in `/pipeline/out`. View `/pipeline/out/shape/polygon.shp` in [QGIS](https://qgis.org/en/site/forusers/download.html).
+7. Reset: `./run.sh clear`  
 
 <br>
