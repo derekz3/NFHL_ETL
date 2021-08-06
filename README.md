@@ -1,7 +1,7 @@
 # NFHL ETL Pipeline  
 
 
-**DONE** : 'E'—extract and 'T'-transform, Docker, extensibility, bash options call   
+**DONE** : 'E'—extract and 'T'—transform, Docker, extensibility, bash options call   
 **NEXT** : Deploy service with Cloud Run
 
 
