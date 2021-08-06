@@ -28,7 +28,7 @@ def nfhl(dfirm, jump):
     # Load data from API calls
     nfhl_loc = 'source main.sh && call ' + str(jump) + ' ' + str(dfirm)
     run(['bash', '-c', nfhl_loc])
-    print("Post-processing data.")
+    print("Post-processing data.\n")
 
 
     # Initialize global variables/data
@@ -43,7 +43,7 @@ def nfhl(dfirm, jump):
         page = json.load(f)
         out = out + page['features']
         f.close()
-    print(f"{len(out)} flood zones acquired from DFIRM-ID {dfirm}.")
+    print(f"{len(out)} flood zones acquired from DFIRM-ID {dfirm}.\n")
 
 
     # Convert list elements to json strings and write to file
