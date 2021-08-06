@@ -21,7 +21,7 @@
 5. Run pipeline: `./run.sh pipeline [-d DFIRM-ID] [-j INDEX]`
     - `-d, --DFIRM`:  Default is Los Angeles County. Change to any county's FEMA DFIRM-ID.  
     - `-j, --JUMP`:  Default is 0. Jump ahead by `(INDEX * 100)` results for testing purposes.  
-    - Example: `./run.sh pipeline -d 06111C -j 30`
+    - Examples: `./run.sh pipeline -d 06111C -j 30` *or perhaps* `./run.sh pipeline -j 50`
 6. Output files located in `/pipeline/out`. View `/pipeline/out/shape/polygon.shp` in [QGIS](https://qgis.org/en/site/forusers/download.html).
 7. Reset directory: `./run.sh clear`  
 
