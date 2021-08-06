@@ -78,11 +78,12 @@ COPY app/. ./
 COPY environment.yml .
 
 # Create the conda environment
-RUN conda env create --file environment.yml
+# Cache mount with Docker Buildkit: https://stackoverflow.com/questions/54183595/conda-cache-for-docker
+RUN --mount=type=cache,target=/opt/conda/pkgs conda env create --file environment.yml
+# RUN conda env create --file environment.yml
 
 # Make RUN commands use the new conda environment
 RUN echo "conda activate pipe" >> ~/.bashrc
-SHELL ["/bin/bash", "--login", "-c"]
 
 # Dynamically run on given DFIRM-ID and starting page
 ARG DFIRM=06037C

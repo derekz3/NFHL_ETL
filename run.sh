@@ -27,11 +27,11 @@ function pipeline {
     clear
 
     # Initialize Docker build command
-    BUILD_STR="docker build -t ignite/conda:pipe"
+    BUILD_STR="DOCKER_BUILDKIT=1 docker build -t ignite/conda:pipe"
 
     # Check if options were passed
     if [ ! $# -eq 0 ]; then
-        echo "Options were passed:"
+        echo "" ; echo "Options were passed."
 
         # Transform long options to short ones
         for arg in "$@"; do
@@ -74,10 +74,10 @@ function pipeline {
     eval $(BUILD)
 
     # Run docker container in interactive terminal
-    docker run -it --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
+    docker run --rm -it --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
 
     # Exit code: success
-    exit 0
+    exit 0 &> /dev/null
 }
 
 
@@ -86,6 +86,7 @@ function clear {
     remove_dir out/shape
     remove out/polygon.json
     remove out/polygon.csv
+    remove out/polygon_clean.csv
 }
 
 
