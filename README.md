@@ -23,6 +23,6 @@
     - `-j, --JUMP`:  Default is 0. Jump ahead by `(INDEX * 100)` results for testing purposes.  
     - Example: `./run.sh pipeline -d 06111C -j 30`
 6. Output files located in `/pipeline/out`. View `/pipeline/out/shape/polygon.shp` in [QGIS](https://qgis.org/en/site/forusers/download.html).
-7. Reset: `./run.sh clear`  
+7. Reset directory: `./run.sh clear`  
 
 <br>

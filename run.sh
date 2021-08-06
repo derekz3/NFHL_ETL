@@ -75,6 +75,8 @@ function pipeline {
 
     # Run docker container in interactive terminal
     docker run -it --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
+
+    # Exit code: success
     exit 0
 }
 
