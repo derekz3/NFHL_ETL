@@ -41,10 +41,9 @@ def nfhl(dfirm, jump):
     for index in range(len(pages)):
         f = open('pages/page' + str(index + start) + '.json',)
         page = json.load(f)
-        print(f"p.{index + start}: {len(page['features'])}")
         out = out + page['features']
         f.close()
-    print(f"Total: {len(out)}")
+    print(f"{len(out)} flood zones acquired from DFIRM-ID {dfirm}.")
 
 
     # Convert list elements to json strings and write to file

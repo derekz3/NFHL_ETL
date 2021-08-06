@@ -21,6 +21,14 @@ function remove {
     fi
 }
 
+# Remove directory
+function remove_dir {
+    DIR=$1
+    if [[ -d "$DIR" ]]; then 
+        rm -r ${DIR}
+    fi
+}
+
 
 # Print readable report
 function report {
@@ -28,8 +36,9 @@ function report {
     COUNT=$2
     LIMIT=$3
     FULL_QUERY=$4
-    echo "p.${PAGE}: Starts at item ${COUNT}."
-    echo "p.${PAGE}: $(( $COUNT + $LIMIT )) flood zones loaded!"
-    echo "p.${PAGE}: ${FULL_QUERY}"
-    echo ""
+    echo "pg.${PAGE} complete!"
+    # echo "p.${PAGE}: Starts at item ${COUNT}."
+    # echo "p.${PAGE}: $(( $COUNT + $LIMIT )) flood zones loaded!"
+    # echo "p.${PAGE}: ${FULL_QUERY}"
+    # echo ""
 }

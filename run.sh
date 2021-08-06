@@ -1,4 +1,5 @@
 #!/bin/bash
+source app/utils.sh
 
 
 # Simplify process for calling pipeline
@@ -18,6 +19,14 @@ function pipeline {
             sleep 1
         done
     fi
+
+    # Reset docker image and container + output directory as needed
+    # Reference: https://stackoverflow.com/questions/38576337/how-to-execute-a-bash-command-only-if-a-docker-container-with-a-given-name-does
+    ! docker container inspect piping &> /dev/null || docker rm -f -v piping
+    ! docker image inspect ignite/conda:pipe &> /dev/null || docker rmi -f ignite/conda:pipe
+    remove_dir out/shape
+    remove polygon.json
+    remove polygon.csv
 
     # Initialize Docker build command
     BUILD_STR="docker build -t ignite/conda:pipe"
@@ -68,6 +77,7 @@ function pipeline {
 
     # Run docker container in interactive terminal
     docker run -it --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
+    exit 2
 }
 
 if [[ $1 == "pipeline" ]]; then
@@ -78,9 +88,13 @@ fi
 # Test command line parsing
 : '
 source run.sh && pipeline
-source run.sh && pipeline --DFIRM 6011C
-./run.sh pipeline --DFIRM 6011C
-./run.sh pipeline --JUMP 50
-./run.sh pipeline --DFIRM 6011C --JUMP 50
-./run.sh pipeline --JUMP 50 --DFIRM 6011C
+source run.sh && pipeline --DFIRM 06111C
+./run.sh pipeline --DFIRM 06111C
+./run.sh pipeline --JUMP 30
+./run.sh pipeline --DFIRM 06111C --JUMP 30
+./run.sh pipeline --JUMP 30 --DFIRM 06111C
+./run.sh pipeline -d 06111C
+./run.sh pipeline -j 30
+./run.sh pipeline -d 06111C -j 30
+./run.sh pipeline -j 30 -d 06111C
 '
