@@ -7,4 +7,5 @@ set -eo pipefail
 # `exec "$@"` to let the following process take over
 
 # Activate conda environment
+export TMOUT=20
 conda activate pipe

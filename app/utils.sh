@@ -1,5 +1,5 @@
 #!/bin/bash
-# File for common bash utility functions
+# Bash helper functions
 
 
 # Empty directory (or create if non-existant)
@@ -36,7 +36,7 @@ function report {
     COUNT=$2
     LIMIT=$3
     FULL_QUERY=$4
-    echo "pg.${PAGE} complete!"
+    echo "pg.$(( $PAGE + 1 )) complete!"
     # echo "p.${PAGE}: Starts at item ${COUNT}."
     # echo "p.${PAGE}: $(( $COUNT + $LIMIT )) flood zones loaded!"
     # echo "p.${PAGE}: ${FULL_QUERY}"

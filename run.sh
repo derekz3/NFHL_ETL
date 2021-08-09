@@ -74,10 +74,12 @@ function pipeline {
     eval $(BUILD)
 
     # Run docker container in interactive terminal
-    docker run --rm -it --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
+    # docker run --rm -it --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
+    # docker run -it --memory="16g" --memory-swap="4g" --cpus="4" --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
+    docker run --rm -it --memory="5g" --memory-swap="6g" --cpus="4" --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
 
     # Exit code: success
-    exit 0 &> /dev/null
+    # exit 0 &> /dev/null
 }
 
 
@@ -87,6 +89,9 @@ function clear {
     remove out/polygon.json
     remove out/polygon.csv
     remove out/polygon_clean.csv
+    remove out/polygon_write.csv
+    remove out/100yr.csv
+    remove out/500yr.csv
 }
 
 
