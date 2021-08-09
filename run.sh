@@ -108,10 +108,13 @@ fi
 : '
 source run.sh && pipeline
 source run.sh && pipeline --DFIRM 06111C
+./run.sh pipeline
+
 ./run.sh pipeline --DFIRM 06111C
 ./run.sh pipeline --JUMP 30
 ./run.sh pipeline --DFIRM 06111C --JUMP 30
 ./run.sh pipeline --JUMP 30 --DFIRM 06111C
+
 ./run.sh pipeline -d 06111C
 ./run.sh pipeline -j 30
 ./run.sh pipeline -d 06111C -j 30

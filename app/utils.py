@@ -1,6 +1,5 @@
 import sys
 import csv
-import pandas as pd
 from subprocess import Popen, PIPE
 # Helper methods for cleaning polygon data
 
