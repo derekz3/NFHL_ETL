@@ -2,6 +2,7 @@
 import sys
 import json
 import glob
+import time
 from utils import *
 print(f"{sys.executable}\n")
 
@@ -9,6 +10,7 @@ print(f"{sys.executable}\n")
 # Make pipeline extensible
 def nfhl(dfirm, jump):
 
+    start_time = time.time()
     csv_max()
 
     # Load data from API calls
@@ -59,6 +61,8 @@ def nfhl(dfirm, jump):
     run(['bash', '-c', 'cp out/100yr.csv /out/100yr.csv'], False)
     run(['bash', '-c', 'cp out/500yr.csv /out/500yr.csv'], False)
     print("Files copied from container to host.")
+
+    print("--- %s seconds ---" % (time.time() - start_time))
     return
 
 

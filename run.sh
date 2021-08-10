@@ -7,6 +7,20 @@ source app/utils.sh
 # Reference: https://stackoverflow.com/questions/12022592/how-can-i-use-long-options-with-the-bash-getopts-builtin
 function pipeline {
 
+    # Check if Docker is installed
+    # Reference: https://www.digitalocean.com/community/questions/how-to-check-for-docker-installation
+    # Reference: https://stackoverflow.com/questions/32744780/install-docker-toolbox-on-a-mac-via-command-line
+    docker -v
+    if (( $? == 0 )); then
+        echo "Docker installed."
+    else 
+        # Install Homebrew
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+        # Install Docker for M1-MAC
+        brew install --cask docker 
+    fi
+
     # Get system memory limit for Docker
     MEM=$(grep -hnr "memoryMiB" /Users/$(id -un)/Library/Group\ Containers/group.com.docker/settings.json | sed 's/.* \(.*\),/\1/')
 

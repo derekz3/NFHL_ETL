@@ -28,7 +28,7 @@ def clean(num_zones):
             refactor_coordinates(polygons, vertices)
 
             # enter = format_row(FLD_ZONE, ZONE_SUBTY, str(vertices).replace("'", ""))
-            enter = str(vertices).replace("'", "") + '\n'
+            enter = str(vertices).replace("'", "").replace(" ", "") + '\n'
             
             # o.write(enter)
             if (check_100yr(FLD_ZONE)): o.write(enter)
