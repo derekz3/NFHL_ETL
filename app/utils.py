@@ -25,10 +25,11 @@ def clean(num_zones):
             polygons = eval(row[0])['coordinates']
 
             # Get each coordinate pair in '{lat: __, lng: __}' format
-            refactor_coordinates(polygons, vertices)
+            refactor_coordinates(polygons, vertices, i)
 
             # enter = format_row(FLD_ZONE, ZONE_SUBTY, str(vertices).replace("'", ""))
-            enter = str(vertices).replace("'", "").replace(" ", "") + '\n'
+            enter = str(vertices).replace("'", "") + ';\n'
+            # .replace(" ", "")
             
             # o.write(enter)
             if (check_100yr(FLD_ZONE)): o.write(enter)
@@ -41,12 +42,14 @@ def clean(num_zones):
 
 
 # Get each coordinate pair in '{lat: __, lng: __}' format
-def refactor_coordinates(polygons, vertices):
+def refactor_coordinates(polygons, vertices, i):
+    vertices.append(f'const polygon{i} = ')
     for j in range(len(polygons)):
         polygon = polygons[j]
         for k in range(len(polygon)):
             vertex = polygon[k]
             vertices.append({'lat':vertex[1],'lng':vertex[0]})
+    vertices.append('')
 
 
 # Check if flood zone belongs to 100 year flood plain (1%)

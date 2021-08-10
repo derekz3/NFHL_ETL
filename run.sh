@@ -18,7 +18,8 @@ function pipeline {
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
         # Install Docker for M1-MAC
-        brew install --cask docker 
+        brew install --cask docker
+        echo "Docker installed."
     fi
 
     # Get system memory limit for Docker
