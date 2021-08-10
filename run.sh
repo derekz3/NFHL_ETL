@@ -7,14 +7,33 @@ source app/utils.sh
 # Reference: https://stackoverflow.com/questions/12022592/how-can-i-use-long-options-with-the-bash-getopts-builtin
 function pipeline {
 
-    # Open Docker if it isn't running
+    # Get system memory limit for Docker
+    MEM=$(grep -hnr "memoryMiB" /Users/$(id -un)/Library/Group\ Containers/group.com.docker/settings.json | sed 's/.* \(.*\),/\1/')
+
+    # If limit is not 10gb, change to 10gb
+    if (( $MEM < 10240 )); then
+
+        echo "Docker system memory limit too low. ("${MEM}gb")"
+
+        # Kill Docker processes
+        # Reference: https://stackoverflow.com/questions/41449827/how-to-restart-docker-for-mac-with-command
+        killall -HUP com.docker.hyperkit
+        echo "Killed Docker."
+
+        # Set total runtime memory limit for Docker (not container) running on host machine's system
+        # Reference: https://stackoverflow.com/questions/42402825/how-to-set-dockers-system-memory/50398665
+        # Reference: https://stackoverflow.com/questions/44533319/how-to-assign-more-memory-to-docker-container
+        sed -i "" "s/$MEM/10240/g" /Users/$(id -un)/Library/Group\ Containers/group.com.docker/settings.json &> /dev/null
+    fi
+
+    # Open Docker if it is not running
     if (! docker stats --no-stream &> /dev/null ); then
 
         # On MacOS, this is the terminal command to launch Docker
-        open /Applications/Docker.app
+        open /Applications/Docker.app # or open -a Docker?
 
         # Wait until Docker daemon is running and has completed initialisation
-        while (! docker stats --no-stream &> /dev/null ); do
+        while (! docker stats --no-stream &> /dev/null); do
             echo "Waiting for Docker to launch..."
             sleep 1
         done
@@ -75,11 +94,10 @@ function pipeline {
 
     # Run docker container in interactive terminal
     # docker run --rm -it --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
-    # docker run -it --memory="16g" --memory-swap="4g" --cpus="4" --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
-    docker run --rm -it --memory="5g" --memory-swap="6g" --cpus="4" --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
+    docker run --rm -it --memory="5g" --memory-swap="6g" --oom-kill-disable --cpus="4" --name piping -v $(pwd)/out:/out ignite/conda:pipe /bin/bash
 
     # Exit code: success
-    # exit 0 &> /dev/null
+    exit 0 &> /dev/null
 }
 
 
